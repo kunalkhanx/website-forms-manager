@@ -6,7 +6,7 @@
         <form action="{{route('profile.do_update')}}" method="POST">
             @csrf
             @method('PATCH')
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div class="form-control">
                     <label for="name">Name</label>
                     <input type="text" id="name" placeholder="Enter user's full name" name="name" value="{{$user->name}}">

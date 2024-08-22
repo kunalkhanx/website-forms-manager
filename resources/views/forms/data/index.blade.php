@@ -3,7 +3,7 @@
 @section('main')
     <div class="container mx-auto max-w-screen-xl p-4">
 
-        <div class="mb-6 flex justify-between items-center">
+        <div class="mb-6 flex max-sm:flex-col gap-6 justify-between items-center">
             <div class="flex items-center">
                 <a href="{{route('forms')}}" class="p-4 pl-0">
                     <svg class="w-8 h-8" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"

@@ -13,7 +13,7 @@
         <form action="{{$user->id ? route('users.do_update', ['user' => $user->id]) : route('users.do_create')}}" method="POST">
             @csrf
             @if($user->id) @method('PATCH') @endif
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div class="form-control">
                     <label for="name">Name</label>
                     <input type="text" id="name" placeholder="Enter user's full name" name="name" value="{{old('name', $user->name)}}">

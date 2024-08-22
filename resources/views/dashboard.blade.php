@@ -3,7 +3,7 @@
 @section('main')
     <div class="container mx-auto max-w-screen-xl p-4 flex flex-col gap-6">
 
-        <div class="grid grid-cols-4 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 
             <div class="rounded-md shadow-md p-4 flex items-center gap-4 bg-rose-600 text-white">
                 <span class="flex h-16 w-16 rounded-full bg-white/30 items-center justify-center">
@@ -70,7 +70,7 @@
 
 
 
-        <div class="grid grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
 
             {{-- TOP FORMS --}}

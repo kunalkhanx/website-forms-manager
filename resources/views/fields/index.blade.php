@@ -3,7 +3,7 @@
 @section('main')
     <div class="container mx-auto max-w-screen-xl p-4">
 
-        <div class="mb-6 flex justify-between items-center">
+        <div class="mb-6 flex max-sm:flex-col gap-6 justify-between items-center">
             <h2 class="text-3xl">Fields</h2>
 
             <a href="{{ route('fields.create') }}"

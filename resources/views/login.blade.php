@@ -11,7 +11,7 @@
 
 <body>
     {{view('partials.alert')}}
-    <div class="w-screen h-screen flex items-center justify-center">
+    <div class="w-screen h-screen flex items-center justify-center px-4">
 
 
 
