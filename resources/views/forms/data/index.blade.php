@@ -20,7 +20,18 @@
         </div>
 
 
-        <div class="flex items-center gap-3 justify-between">
+        <div class="flex items-end gap-3 justify-between">
+
+            <form action="{{route('forms.form_data', ['id' => $form->id])}}" method="GET" class="w-full max-w-xs">
+                <div class="relative w-full">
+                    <button type="submit" class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                        <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
+                        </svg>                          
+                    </button>
+                    <input name="search" type="text" id="search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search" value="{{request()->search}}">
+                </div>
+            </form>
 
            <form action="{{route('forms.form_data', ['id' => $form->id])}}" method="GET" class="flex items-end gap-3">
                 <div class="form-control w-full max-w-36">

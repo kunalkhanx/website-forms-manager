@@ -39,6 +39,9 @@ class FormController extends Controller
         if($request->start_date && $request->end_date){
             $query->whereDate('created_at', '>=', $request->start_date)->whereDate('created_at', '<=', $request->end_date);
         }
+        if($request->search){
+            $query->where('data', 'LIKE', '%' . $request->search . '%');
+        }
         $formData = $query->paginate(10);
         return view('forms.data.index', ['form' => $form, 'formData' => $formData]);
     }
