@@ -1,9 +1,9 @@
 @extends('app')
 
 @section('main')
-    <div class="container mx-auto max-w-screen-xl p-4">
+    <div class="container mx-auto max-w-screen-xl p-4 flex flex-col gap-6">
 
-        <div class="mb-6 flex max-sm:flex-col gap-6 justify-between items-center">
+        <div class="flex max-sm:flex-col gap-6 justify-between items-center">
             <div class="flex items-center">
                 <a href="{{route('forms')}}" class="p-4 pl-0">
                     <svg class="w-8 h-8" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -17,6 +17,28 @@
 
             <a href="{{route('forms.create_data', ['id' => $form->id])}}"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add data</a>
+        </div>
+
+
+        <div class="flex items-center gap-3 justify-between">
+
+           <form action="{{route('forms.form_data', ['id' => $form->id])}}" method="GET" class="flex items-end gap-3">
+                <div class="form-control w-full max-w-36">
+                    <label for="start_date">Start date</label>
+                    <input type="date" name="start_date" id="start_date" value="{{request()->start_date}}">
+                </div>
+
+                <div class="form-control w-full max-w-36">
+                    <label for="end_date">End date</label>
+                    <input type="date" name="end_date" id="end_date" value="{{request()->end_date}}">
+                </div>
+
+                <div class="flex gap-2 items-center">
+                    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Filter</button>
+                    <a href="{{route('forms.form_data', ['id' => $form->id])}}" type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Reset</a>
+                </div>
+           </form>
+
         </div>
 
 

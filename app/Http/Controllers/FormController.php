@@ -30,12 +30,16 @@ class FormController extends Controller
         $fields = $form->fields()->get();
         return view('forms.form', ['form' => $form, 'fields' => $fields]);
     }
-    public function form_data($id){
+    public function form_data(Request $request, $id){
         $form = Form::where('id', $id)->with('user')->with('fields')->first();
         if(!$form){
             return response('', 404);
         }
-        $formData = $form->data()->paginate(10);
+        $query = $form->data();
+        if($request->start_date && $request->end_date){
+            $query->whereDate('created_at', '>=', $request->start_date)->whereDate('created_at', '<=', $request->end_date);
+        }
+        $formData = $query->paginate(10);
         return view('forms.data.index', ['form' => $form, 'formData' => $formData]);
     }
     public function create_data($id){
