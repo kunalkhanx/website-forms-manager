@@ -6,9 +6,9 @@
 - Commenting on Blade Templates
 - Create a lots of data & test tables & set configurations
 - Redesin the UI *
-- Fix the boolean value in exported csv for form data
 
 # Completed Tasks
+- Fix the boolean value in exported csv for form data
 - Add Export csv option to the form data
 - Fix pagination & other urls of the form data page
 - Make the UI responsive

@@ -69,7 +69,12 @@ class FormController extends Controller
             $dataObject = json_decode($data->data, true);
             $dataRow = [$data->id];
             foreach($form->fields as $field){
-                $dataRow[] = isset($dataObject[$field->name]) ? $dataObject[$field->name] : '';
+                if(str_contains($field->validation_rules, 'boolean')){
+                    $dataRow[] = isset($dataObject[$field->name]) ? ($dataObject[$field->name] == 1 ? 'Yes' : 'No') : 'No';
+                }else{
+                    $dataRow[] = isset($dataObject[$field->name]) ? $dataObject[$field->name] : '';
+                }
+                
             }
             $dataRow[] = $data->created_at;
             $dataRow[] = $data->updated_at;
