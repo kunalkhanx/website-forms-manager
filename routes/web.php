@@ -18,6 +18,7 @@ Route::middleware('admin')->group(function(){
         Route::post('/create', [\App\Http\Controllers\FormController::class, 'do_create'])->name('forms.do_create');
 
         Route::get('/data/{id}', [\App\Http\Controllers\FormController::class, 'form_data'])->name('forms.form_data');
+        Route::get('/data/export/{id}', [\App\Http\Controllers\FormController::class, 'do_export_data'])->name('forms.export_data');
         Route::get('/data/create/{id}', [\App\Http\Controllers\FormController::class, 'create_data'])->name('forms.create_data');
         Route::get('/data/update/{id}/{formData}', [\App\Http\Controllers\FormController::class, 'update_data'])->name('forms.update_data');
         Route::get('/data/{id}/{formData}', [\App\Http\Controllers\FormController::class, 'show_data'])->name('forms.show_data');

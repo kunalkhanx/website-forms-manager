@@ -45,6 +45,48 @@ class FormController extends Controller
         $formData = $query->paginate(10);
         return view('forms.data.index', ['form' => $form, 'formData' => $formData]);
     }
+
+    public function do_export_data(Request $request, $id){
+        $form = Form::where('id', $id)->with('user')->with('fields')->first();
+        if(!$form){
+            return response('', 404);
+        }
+        $query = $form->data();
+        if($request->start_date && $request->end_date){
+            $query->whereDate('created_at', '>=', $request->start_date)->whereDate('created_at', '<=', $request->end_date);
+        }
+        if($request->search){
+            $query->where('data', 'LIKE', '%' . $request->search . '%');
+        }
+        $formData = $query->take(1000)->get();
+        $fields = [];
+        foreach($form->fields as $field){
+            $fields[] = $field->label ? $field->label : $field->name;
+        }
+        $handle = fopen('php://memory', 'r+');
+        fputcsv($handle, ['Id', ...$fields, 'Created At', 'Updated At']);
+        foreach ($formData as $data) {
+            $dataObject = json_decode($data->data, true);
+            $dataRow = [$data->id];
+            foreach($form->fields as $field){
+                $dataRow[] = isset($dataObject[$field->name]) ? $dataObject[$field->name] : '';
+            }
+            $dataRow[] = $data->created_at;
+            $dataRow[] = $data->updated_at;
+            fputcsv($handle, $dataRow);
+        }
+        
+        rewind($handle);
+        $contents = stream_get_contents($handle);
+        fclose($handle);
+
+        return response($contents)
+        ->header('Content-Type', 'text/csv')
+        ->header('Content-Disposition', 'attachment; filename="form_data.csv"')
+        ->header('Pragma', 'no-cache')
+        ->header('Expires', '0');
+    }
+
     public function create_data($id){
         $form = Form::where('id', $id)->with('fields')->first();
         return view('forms.data.form', ['form' => $form, 'formData' => new FormData]);

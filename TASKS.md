@@ -1,5 +1,4 @@
 # Pending Tasks
-- Add Export csv option to the form data
 - Forgot password option
 - Change the validation rules input of fields
 - Add File upload option *
@@ -7,8 +6,10 @@
 - Commenting on Blade Templates
 - Create a lots of data & test tables & set configurations
 - Redesin the UI *
+- Fix the boolean value in exported csv for form data
 
 # Completed Tasks
+- Add Export csv option to the form data
 - Fix pagination & other urls of the form data page
 - Make the UI responsive
 - Add filter to the form data
