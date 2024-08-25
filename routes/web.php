@@ -58,7 +58,13 @@ Route::middleware('super')->group(function(){
 });
 
 Route::get('/login', [\App\Http\Controllers\AuthController::class, 'login'])->name('login');
+Route::get('/forgot-password', [\App\Http\Controllers\AuthController::class, 'forgot_password'])->name('forgot_password');
+Route::get('/forgot-password/verify', [\App\Http\Controllers\AuthController::class, 'set_password'])->name('forgot_password.do_verify');
+
 Route::post('/login', [\App\Http\Controllers\AuthController::class, 'do_login'])->name('do_login');
+Route::post('/forgot-password', [\App\Http\Controllers\AuthController::class, 'do_forgot_password'])->name('do_forgot_password');
+Route::post('/forgot-password/set-password', [\App\Http\Controllers\AuthController::class, 'do_set_password'])->name('forgot_password.do_set_password');
+
 
 
 
