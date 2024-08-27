@@ -26,14 +26,28 @@ class FieldController extends Controller
             'name' => 'required|min:3|max:25|unique:fields,name',
             'label' => 'nullable|max:50',
             'placeholder' => 'nullable|max:100',
-            'validation_rules' => 'required|max:500'
+            'validation_rules' => 'array'
         ]);
-
+        $rules = "";
+        foreach($request->validation_rules as $rule){
+            if($rule === 'max' && $request->max){
+                $rules .= "|{$rule}:{$request->max}";
+            }else if($rule === 'min' && $request->min){
+                $rules .= "|{$rule}:{$request->min}";
+            }else if($rule === 'in' && $request->in){
+                $rules .= "|{$rule}:{$request->in}";
+            }else if($rule === 'digits' && $request->digits){
+                $rules .= "|{$rule}:{$request->digits}";
+            }else{
+                $rules .= "|{$rule}";
+            }
+        }
+        $rules = substr($rules, 1);
         $field = new Field;
         $field->name = $request->name;
         $field->label = $request->label;
         $field->placeholder = $request->placeholder;
-        $field->validation_rules = $request->validation_rules;
+        $field->validation_rules = $rules;
         $result = $field->save();
         if(!$result){
             return redirect()->back()->withInput()->with('error', 'Unable to create the field!');
@@ -49,12 +63,27 @@ class FieldController extends Controller
             'name' => 'required|min:3|max:25|unique:fields,name,' . $field->id . ',id',
             'label' => 'nullable|max:50',
             'placeholder' => 'nullable|max:100',
-            'validation_rules' => 'required|max:500'
+            'validation_rules' => 'array'
         ]);
+        $rules = "";
+        foreach($request->validation_rules as $rule){
+            if($rule === 'max' && $request->max){
+                $rules .= "|{$rule}:{$request->max}";
+            }else if($rule === 'min' && $request->min){
+                $rules .= "|{$rule}:{$request->min}";
+            }else if($rule === 'in' && $request->in){
+                $rules .= "|{$rule}:{$request->in}";
+            }else if($rule === 'digits' && $request->digits){
+                $rules .= "|{$rule}:{$request->digits}";
+            }else{
+                $rules .= "|{$rule}";
+            }
+        }
+        $rules = substr($rules, 1);
         $field->name = $request->name;
         $field->label = $request->label;
         $field->placeholder = $request->placeholder;
-        $field->validation_rules = $request->validation_rules;
+        $field->validation_rules = $rules;
         $result = $field->save();
         if(!$result){
             return redirect()->back()->withInput()->with('error', 'Unable to update the field!');

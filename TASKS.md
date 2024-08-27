@@ -1,10 +1,11 @@
 # Pending Tasks
-- Change the validation rules input system of fields
 - Add File upload option *
 - Commenting on Controller Functions
 - Commenting on Blade Templates
 - Create a lots of data & test tables & set configurations
 - Redesin the UI *
+- Add more validation rules
+- Update validation rules UI
 
 # Completed Tasks
 - Forgot password option
@@ -14,3 +15,4 @@
 - Make the UI responsive
 - Add filter to the form data
 - Add search to the form data
+- Change the validation rules input system of fields
