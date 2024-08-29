@@ -32,6 +32,9 @@
                         if($value == 'email'){
                             return ['email'];
                         }
+                        if($value == 'file'){
+                            return ['file'];
+                        }
                         if (str_contains($value, 'max:')) {
                             $maxValue = (int) explode(':', $value)[1];
                             if ($maxValue > 255) {
@@ -40,7 +43,6 @@
                             break;
                         }
                         if (str_starts_with($value, 'in:')) {
-                            // echo $value . '<br>';
                             $valuesStr = explode(':', $value)[1];
                             $valuesArr = explode(',', $valuesStr);
                             return ['array', $valuesArr];
@@ -52,7 +54,7 @@
                 $fData = json_decode($formData->data, true);
             @endphp
 
-            <form action="{{$formData->id ? route('forms.do_update_data', ['formData' => $formData->id]) : route('forms.do_create_data', ['form' => $form->id])}}" class="flex flex-col gap-4" method="POST">
+            <form action="{{$formData->id ? route('forms.do_update_data', ['formData' => $formData->id]) : route('forms.do_create_data', ['form' => $form->id])}}" class="flex flex-col gap-4" method="POST" enctype="multipart/form-data">
                 @csrf
                 @if($formData->id) @method('PATCH') @endif
                 @foreach ($form->fields as $field)
@@ -89,6 +91,15 @@
                                     <option {{old($field->name, !isset($fData[$field->name]) ? null : $fData[$field->name]) === $item ? 'selected' : ''}} value="{{ $item }}">{{ ucfirst(strtolower($item)) }}</option>
                                 @endforeach
                             </select>
+                            @error($field->name)
+                                <p class="err">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                    @elseif($inputType[0] == 'file')
+                        <div class="file-control">
+                            <label for="{{$field->name}}">{{ $field->label }}</label>
+                            <input type="file" name="{{$field->name}}" placeholder="{{$field->placeholder}}">
                             @error($field->name)
                                 <p class="err">{{ $message }}</p>
                             @enderror

@@ -39,16 +39,8 @@
                     <p class="err">{{$message}}</p>
                 @enderror
             </div>
-
-            {{-- <div class="form-control">
-                <label for="validation_rules">Validation rules</label>
-                <textarea placeholder="Enter validation rules ..." name="validation_rules" id="validation_rules" rows="2">{{old('validation_rules', $field->validation_rules)}}</textarea>
-                @error('validation_rules')
-                    <p class="err">{{$message}}</p>
-                @enderror
-            </div> --}}
             @php
-                $rules = ['numeric' => false, 'email' => false, 'boolean' => false, 'max' => 0, 'min' => 0, 'digits' => 0, 'in' => ''];
+                $rules = ['numeric' => false, 'file' => false, 'email' => false, 'boolean' => false, 'max' => 0, 'min' => 0, 'digits' => 0, 'in' => ''];
                 $existing_rules = old('validation_rules') ? old('validation_rules') : explode('|', $field->validation_rules);
                 foreach ($existing_rules as $rule) {
                     if(str_contains($rule, ':')){
@@ -60,7 +52,6 @@
                         $rules[$rule] = true;
                     }
                 }
-                // print_r($rules);
             @endphp
 
             <div class="flex flex-col gap-4">
@@ -77,19 +68,24 @@
                 </div>
 
                 <div class="flex items-center">
+                    <input id="vr-file" name="validation_rules[]" {{$rules['file'] ? 'checked' : ''}} type="checkbox" value="file" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <label for="vr-file" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">File</label>
+                </div>
+
+                <div class="flex items-center">
                     <input id="vr-checkbox" name="validation_rules[]" {{$rules['boolean'] ? 'checked' : ''}} type="checkbox" value="boolean" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                     <label for="vr-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Checkbox (yes/no)</label>
                 </div>
 
                 <div class="flex items-center">
                     <input id="vr-max" name="validation_rules[]" type="checkbox" {{$rules['max'] ? 'checked' : ''}}  value="max" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                    <label for="vr-max" class="mx-2 text-sm font-medium text-gray-900 dark:text-gray-300">Max Length</label>
+                    <label for="vr-max" class="mx-2 text-sm font-medium text-gray-900 dark:text-gray-300">Max Length/Size</label>
                     <input type="number" name="max" value="{{$rules['max']}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-14 p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-50">
                 </div>
 
                 <div class="flex items-center">
                     <input id="vr-min" name="validation_rules[]" {{$rules['min'] ? 'checked' : ''}} type="checkbox" value="min" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                    <label for="vr-min" class="mx-2 text-sm font-medium text-gray-900 dark:text-gray-300">Min Length</label>
+                    <label for="vr-min" class="mx-2 text-sm font-medium text-gray-900 dark:text-gray-300">Min Length/Size</label>
                     <input type="number" name="min" value="{{$rules['min']}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-14 p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-50">
                 </div>
 

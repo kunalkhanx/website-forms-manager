@@ -1,5 +1,5 @@
 # Pending Tasks
-- Add File upload option *
+- Add File upload option for API
 - Commenting on Controller Functions
 - Commenting on Blade Templates
 - Create a lots of data & test tables & set configurations
@@ -8,6 +8,7 @@
 - Update validation rules UI
 
 # Completed Tasks
+- Add File upload option
 - Forgot password option
 - Fix the boolean value in exported csv for form data
 - Add Export csv option to the form data

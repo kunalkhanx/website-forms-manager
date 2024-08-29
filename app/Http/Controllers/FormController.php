@@ -237,6 +237,7 @@ class FormController extends Controller
         $fields = $form->fields()->get();
         $validation_rules = [];
         $data = [];
+        $files = [];
         foreach($fields as $field){
             $validation_rules[$field->name] = ($field->pivot->is_required ? 'required|' : '') . $field->validation_rules;
             if($field->pivot->is_unique && $request->{$field->name}){
@@ -246,9 +247,16 @@ class FormController extends Controller
                 }
             }
             $data[$field->name] = $request->get($field->name);
+            if(str_contains($field->validation_rules, 'file')){
+                $files[] = $field->name;
+            }
         }
         $request->validate($validation_rules);
-
+        $date = date('d-m-Y');
+        foreach($files as $file_id){
+            $file = $request->file($file_id);
+            $data[$file_id] = $file->store('uploads/' . $file_id . '/' . $date);
+        }
         $formData = new FormData;
         $formData->form_id = $form->id;
         $formData->data = json_encode($data);
@@ -316,8 +324,9 @@ class FormController extends Controller
         $fields = $form->fields()->get();
         $validation_rules = [];
         $data = [];
+        $files = [];
         foreach($fields as $field){
-            $validation_rules[$field->name] = ($field->pivot->is_required ? 'required|' : '') . $field->validation_rules;
+            $validation_rules[$field->name] = ($field->pivot->is_required && !str_contains($field->validation_rules, 'file') ? 'required|' : '') . $field->validation_rules;
             if($field->pivot->is_unique && $request->{$field->name}){
                 $uniqueResult = FormData::where('form_id', $form->id)->where('data', 'LIKE', '%"email": "'. $request->{$field->name} .'"%')->where('id', '!=', $formData->id)->first();
                 if($uniqueResult){
@@ -326,9 +335,16 @@ class FormController extends Controller
             }
 
             $data[$field->name] = $request->get($field->name);
+            if(str_contains($field->validation_rules, 'file') && $request->file($field->name)){
+                $files[] = $field->name;
+            }
         }
         $request->validate($validation_rules);
-
+        $date = date('d-m-Y');
+        foreach($files as $file_id){
+            $file = $request->file($file_id);
+            $data[$file_id] = $file->store('uploads/' . $file_id . '/' . $date);
+        }
         $formData->data = json_encode($data);
         $result = $formData->save();
         if(!$result){
