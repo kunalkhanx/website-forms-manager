@@ -35,8 +35,10 @@
                 function printData($dataToPrint, $validation_rules){
                     $rules = explode('|', $validation_rules);
                     if(in_array('boolean', $rules)){
-                        // var_dump($dataToPrint);
                         return $dataToPrint == 1 ? 'Yes' : 'No';
+                    }
+                    if(in_array('file', $rules)){
+                        return '<a href="' . route('file_download', ['file' => $dataToPrint]) . '" class="text-blue-600 hover:text-blue-700 hover:underline">Download</a>';
                     }
                     return $dataToPrint;
                 }
@@ -60,7 +62,7 @@
                             {{$field->label ? $field->label : $field->name}}
                         </th>
                         <td class="px-6 py-4">
-                            {{ printData(!isset($data[$field->name]) ? null : $data[$field->name], $field->validation_rules) }}
+                            {!! printData(!isset($data[$field->name]) ? null : $data[$field->name], $field->validation_rules) !!}
                         </td>                       
                     </tr>
                     @endforeach

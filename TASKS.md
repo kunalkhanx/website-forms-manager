@@ -1,5 +1,4 @@
 # Pending Tasks
-- View file view/download option on data view
 - Add File upload option for API
 - Commenting on Controller Functions
 - Commenting on Blade Templates
@@ -9,6 +8,7 @@
 - Update validation rules UI
 
 # Completed Tasks
+- View file view/download option on data view
 - Add a file model
 - Add File upload option
 - Forgot password option
