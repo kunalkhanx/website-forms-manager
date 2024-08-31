@@ -65,7 +65,7 @@ Route::post('/login', [\App\Http\Controllers\AuthController::class, 'do_login'])
 Route::post('/forgot-password', [\App\Http\Controllers\AuthController::class, 'do_forgot_password'])->name('do_forgot_password');
 Route::post('/forgot-password/set-password', [\App\Http\Controllers\AuthController::class, 'do_set_password'])->name('forgot_password.do_set_password');
 
-
+Route::get('/download/{file}', [\App\Http\Controllers\FileController::class, 'download'])->name('file_download');
 
 
 Route::middleware(['cors', 'APIAuth'])->group(function(){
