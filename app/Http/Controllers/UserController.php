@@ -7,18 +7,35 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+
+    /**
+     * Function - Users table page
+     * 
+     * @return View
+     */
     public function index()
     {
         $users = User::latest()->paginate(10);
         return view('users.index', ['users' => $users]);
     }
 
-
+    /**
+     * Function - Create new user page
+     * 
+     * @return View
+     */
     public function create()
     {
         return view('users.form', ['user' => new User]);
     }
 
+    /**
+     * Function - Update existing user page
+     * 
+     * @param User $user
+     * 
+     * @return View
+     */
     public function update(User $user)
     {
         if(!$user){
@@ -27,6 +44,13 @@ class UserController extends Controller
         return view('users.form', ['user' => $user]);
     }
 
+    /**
+     * Function - Create new user action
+     * 
+     * @param Request $request
+     * 
+     * @return Redirect
+     */
     public function do_create(Request $request)
     {
         $request->validate([
@@ -57,6 +81,14 @@ class UserController extends Controller
         return redirect()->back()->with('success', 'User created successfully!');
     }
 
+    /**
+     * Function - Update existing user action
+     * 
+     * @param Request $request
+     * @param User $user
+     * 
+     * @return Redirect
+     */
     public function do_update(Request $request, User $user)
     {
         if(!$user){
@@ -100,6 +132,13 @@ class UserController extends Controller
     }
 
 
+    /**
+     * Function - Delete a user
+     * 
+     * @param User $user
+     * 
+     * @return Redirect
+     */
     public function do_delete(User $user){
         if(!$user){
             return response('', 404);

@@ -11,14 +11,32 @@ use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
+
+    /**
+     * Function - Login page view
+     * 
+     * @return View
+     */
     public function login(){
         return view('auth.login');
     }
 
+    /**
+     * Function - Forgot password page view
+     * 
+     * @return View
+     */
     public function forgot_password(){
         return view('auth.forgot');
     }
 
+    /**
+     * Function - Set password page view
+     * 
+     * @param Request $request
+     * 
+     * @return View
+     */
     public function set_password(Request $request){
         $token = $request->token;
         if(!$token){
@@ -37,6 +55,13 @@ class AuthController extends Controller
         return view('auth.password', ['token' => $encoded_str]);
     }
 
+    /**
+     * Function - Set password action
+     * 
+     * @param Request $request
+     * 
+     * @return Redirect
+     */
     public function do_set_password(Request $request){
         $request->validate([
             'verify_token' => 'required',
@@ -59,6 +84,13 @@ class AuthController extends Controller
         return redirect()->route('login')->with('success', 'Password chanegd successfully!');
     }
 
+    /**
+     * Function - Forgot password action
+     * 
+     * @param Request $request
+     * 
+     * @return Redirect
+     */
     public function do_forgot_password(Request $request){
         $username = $request->username;
         if(!$username){
@@ -78,7 +110,13 @@ class AuthController extends Controller
     }
 
     
-
+    /**
+     * Function - Login action
+     * 
+     * @param Request $request
+     * 
+     * @return Redirect
+     */
     public function do_login(Request $request){
         if(!$request->username || !$request->password){
             return redirect()->back()->with('error', 'Please enter your valid username & password');
@@ -96,11 +134,21 @@ class AuthController extends Controller
         return redirect()->route('dashboard')->with('success', 'Login success!');
     }
 
+    /**
+     * Function - Logout action
+     * 
+     * @return Redirect
+     */
     public function do_logout(){
         Auth::logout();
         return redirect()->route('login');
     }
 
+     /**
+     * Function - Generate a encrypted token
+     * 
+     * @return Redirect
+     */
     public function generate_token(){
         $user = Auth::user();
         $data = [

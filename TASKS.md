@@ -1,13 +1,15 @@
 # Pending Tasks
-- Add File upload option for API
-- Commenting on Controller Functions
+- Remove the API functions
 - Commenting on Blade Templates
+- Create complete API module for Form management
 - Create a lots of data & test tables & set configurations
 - Redesin the UI *
 - Add more validation rules
 - Update validation rules UI
+- Add detailed comments to controller function
 
 # Completed Tasks
+- Commenting on Controller Functions
 - View file view/download option on data view
 - Add a file model
 - Add File upload option

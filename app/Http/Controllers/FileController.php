@@ -3,10 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\File;
-use Illuminate\Http\Request;
 
 class FileController extends Controller
 {
+
+    /**
+     * Function - Download a file by id
+     * 
+     * @param File $file
+     * 
+     * @return Response
+     */
     public function download(File $file){
         if(!$file){
             return response('', 404);

@@ -10,6 +10,12 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
+    
+     /**
+     * Function - Dashboard page view
+     * 
+     * @return View
+     */
     public function index(){
 
         $total = [

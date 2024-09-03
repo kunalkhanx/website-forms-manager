@@ -7,13 +7,33 @@ use Illuminate\Http\Request;
 
 class FieldController extends Controller
 {
+
+     /**
+     * Function - Fields table page
+     * 
+     * @return View
+     */
     public function index(){
         $fields = Field::where('status', '>=', 0)->latest()->paginate(10);
         return view('fields.index', ['fields' => $fields]);
     }
+
+     /**
+     * Function - Create new field page
+     * 
+     * @return View
+     */
     public function create(){
         return view('fields.form', ['field' => new Field]);
     }
+
+     /**
+     * Function - Update existing field page
+     * 
+     * @param Field $field
+     * 
+     * @return View
+     */
     public function update(Field $field){
         if(!$field){
             return response('', 404);
@@ -21,6 +41,14 @@ class FieldController extends Controller
         return view('fields.form', ['field' => $field]);
     }
 
+
+    /**
+     * Function - Create field action
+     * 
+     * @param Request $request
+     * 
+     * @return Redirect
+     */
     public function do_create(Request $request){
         $request->validate([
             'name' => 'required|min:3|max:25|unique:fields,name',
@@ -55,6 +83,14 @@ class FieldController extends Controller
         return redirect()->back()->with('success', 'Field created successfully!');
     }
 
+    /**
+     * Function - Update existing field action
+     * 
+     * @param Request $request
+     * @param Field $field
+     * 
+     * @return Redirect
+     */
     public function do_update(Request $request, Field $field){
         if(!$field){
             return response('', 404);
@@ -91,6 +127,13 @@ class FieldController extends Controller
         return redirect()->back()->with('success', 'Field updated successfully!');
     }
 
+    /**
+     * Function - Field will moved to trash
+     * 
+     * @param Field $field
+     * 
+     * @return Redirect
+     */
     public function do_delete(Field $field){
         if(!$field){
             return response('', 404);

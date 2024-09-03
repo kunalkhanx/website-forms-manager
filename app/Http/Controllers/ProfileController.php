@@ -7,11 +7,24 @@ use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
+
+    /**
+     * Function - Profile update page
+     * 
+     * @return View
+     */
     public function index(){
         $user = Auth::user();
         return view('profile', ['user' => $user]);
     }
 
+    /**
+     * Function - Update profile action
+     * 
+     * @param Request $request
+     * 
+     * @return Redirect
+     */
     public function do_update(Request $request){
         $user = Auth::user();
         $request->validate([

@@ -7,7 +7,6 @@ use App\Models\File;
 use App\Models\Form;
 use App\Models\FormData;
 use App\Models\FormField;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -15,6 +14,11 @@ use Illuminate\Support\Facades\Validator;
 class FormController extends Controller
 {
 
+    /**
+     * Function - Forms table page
+     * 
+     * @return View
+     */
     public function index()
     {
         $forms = Form::where('status', '>=', 0)->with(['user' => function ($query) {
@@ -22,10 +26,24 @@ class FormController extends Controller
         }])->withCount('fields')->withCount('data')->latest()->paginate(10);
         return view('forms.index', ['forms' => $forms]);
     }
+
+    /**
+     * Function - Create form page
+     * 
+     * @return View
+     */
     public function create()
     {
         return view('forms.form', ['form' => new Form]);
     }
+
+    /**
+     * Function - Update exisitng form page
+     * 
+     * @param Form $form
+     * 
+     * @return View
+     */
     public function update(Form $form)
     {
         if (!$form) {
@@ -34,6 +52,15 @@ class FormController extends Controller
         $fields = $form->fields()->get();
         return view('forms.form', ['form' => $form, 'fields' => $fields]);
     }
+
+    /**
+     * Function - Submitted form data table page
+     * 
+     * @param Request $request
+     * @param Int $id
+     * 
+     * @return View
+     */
     public function form_data(Request $request, $id)
     {
         $form = Form::where('id', $id)->with('user')->with('fields')->first();
@@ -51,6 +78,79 @@ class FormController extends Controller
         return view('forms.data.index', ['form' => $form, 'formData' => $formData]);
     }
 
+    /**
+     * Function - Dynamic form to create form-data
+     * 
+     * @param Int $id Form id
+     * 
+     * @return View
+     */
+    public function create_data($id)
+    {
+        $form = Form::where('id', $id)->with('fields')->first();
+        return view('forms.data.form', ['form' => $form, 'formData' => new FormData]);
+    }
+
+    /**
+     * Function - Dynamic form to update exisitng form-data
+     * 
+     * @param Int $id Form id
+     * @param FormData $formData
+     * 
+     * @return View
+     */
+    public function update_data($id, FormData $formData)
+    {
+        $form = Form::where('id', $id)->with('fields')->first();
+        if (!$formData || !$form) {
+            return response('', 404);
+        }
+        return view('forms.data.form', ['form' => $form, 'formData' => $formData]);
+    }
+
+    /**
+     * Function - Show a single form-data entry
+     * 
+     * @param Int $id Form id
+     * @param FormData $formData
+     * 
+     * @return View
+     */
+    public function show_data($id, FormData $formData)
+    {
+        $form = Form::where('id', $id)->with('fields')->first();
+        if (!$formData || !$form) {
+            return response('', 404);
+        }
+        return view('forms.data.show', ['form' => $form, 'formData' => $formData]);
+    }
+
+    /**
+     * Function - Show API JSON Data
+     * 
+     * @param FormData $formData
+     * 
+     * @return JSON
+     */
+    public function show_api_data(FormData $formData)
+    {
+        if (!$formData) {
+            return response('', 404);
+        }
+        return response()->json([
+            'message' => 'Request success!',
+            'data' => json_decode($formData->data, true)
+        ], 200);
+    }
+
+    /**
+     * Function - Exported form-data as CSV
+     * 
+     * @param Request $request
+     * @param Int $id Form id
+     * 
+     * @return Response
+     */
     public function do_export_data(Request $request, $id)
     {
         $form = Form::where('id', $id)->with('user')->with('fields')->first();
@@ -97,38 +197,15 @@ class FormController extends Controller
             ->header('Expires', '0');
     }
 
-    public function create_data($id)
-    {
-        $form = Form::where('id', $id)->with('fields')->first();
-        return view('forms.data.form', ['form' => $form, 'formData' => new FormData]);
-    }
-    public function update_data($id, FormData $formData)
-    {
-        $form = Form::where('id', $id)->with('fields')->first();
-        if (!$formData || !$form) {
-            return response('', 404);
-        }
-        return view('forms.data.form', ['form' => $form, 'formData' => $formData]);
-    }
-    public function show_data($id, FormData $formData)
-    {
-        $form = Form::where('id', $id)->with('fields')->first();
-        if (!$formData || !$form) {
-            return response('', 404);
-        }
-        return view('forms.data.show', ['form' => $form, 'formData' => $formData]);
-    }
-    public function show_api_data(FormData $formData)
-    {
-        if (!$formData) {
-            return response('', 404);
-        }
-        return response()->json([
-            'message' => 'Request success!',
-            'data' => json_decode($formData->data, true)
-        ], 200);
-    }
-
+    
+    
+    /**
+     * Function - Create new form action
+     * 
+     * @param Request $request
+     * 
+     * @return Redirect
+     */
     public function do_create(Request $request)
     {
         $request->validate([
@@ -159,6 +236,14 @@ class FormController extends Controller
         return redirect()->route('forms.update', ['form' => $form->id])->with('success', 'Form created successfully!');
     }
 
+    /**
+     * Function - Update exisitng form action
+     * 
+     * @param Request $request
+     * @param Form $form
+     * 
+     * @return Redirect
+     */
     public function do_update(Request $request, Form $form)
     {
         if (!$form) {
@@ -191,6 +276,13 @@ class FormController extends Controller
         return redirect()->back()->with('success', 'Form updated successfully!');
     }
 
+    /**
+     * Function - Move form to trash
+     * 
+     * @param Form $form
+     * 
+     * @return Redirect
+     */
     public function do_delete(Form $form)
     {
         if (!$form) {
@@ -204,7 +296,14 @@ class FormController extends Controller
         return redirect()->back()->with('success', 'Form deleted successfully!');
     }
 
-
+    /**
+     * Function - Attch a field to a form
+     * 
+     * @param Request $request
+     * @param Form $form
+     * 
+     * @return Redirect
+     */
     public function do_add_field(Request $request, Form $form)
     {
         if (!$form) {
@@ -234,6 +333,14 @@ class FormController extends Controller
         return redirect()->back()->with('success', 'Filed added to the form successfully.');
     }
 
+    /**
+     * Function - Detach a field form a form
+     * 
+     * @param Form $form
+     * @param Field $field
+     * 
+     * @return Redirect
+     */
     public function do_remove_field(Form $form, Field $field)
     {
         if (!$form || !$field) {
@@ -246,6 +353,14 @@ class FormController extends Controller
         return redirect()->back()->with('success', 'Field removed successfully!');
     }
 
+    /**
+     * Function - Create new form-data action
+     * 
+     * @param Request $request
+     * @param Form $form
+     * 
+     * @return Redirect
+     */
     public function do_create_data(Request $request, Form $form)
     {
         if (!$form) {
@@ -296,6 +411,14 @@ class FormController extends Controller
         return redirect()->back()->with('success', 'Data added successfully!');
     }
 
+    /**
+     * Function - Create new form-data using API
+     * 
+     * @param Request $request
+     * @param Form $form
+     * 
+     * @return JSON
+     */
     public function do_create_api_data(Request $request, Form $form)
     {
         if (!$form) {
@@ -343,6 +466,14 @@ class FormController extends Controller
         ], 201);
     }
 
+    /**
+     * Function - Update exisitng form-data action
+     * 
+     * @param Request $request
+     * @param FormData $formData
+     * 
+     * @return Redirect
+     */
     public function do_update_data(Request $request, FormData $formData)
     {
         if (!$formData) {
@@ -396,6 +527,15 @@ class FormController extends Controller
         return redirect()->back()->with('success', 'Data updated successfully!');
     }
 
+    /**
+     * Function - Update exisitng form-data action API
+     * 
+     * @param Request $request
+     * @param Form $form
+     * @param FormData $formData
+     * 
+     * @return JSON
+     */
     public function do_update_api_data(Request $request, Form $form, FormData $formData)
     {
         if (!$formData || !$form) {
@@ -444,6 +584,13 @@ class FormController extends Controller
         ], 200);
     }
 
+    /**
+     * Function - Delete a form-data
+     * 
+     * @param FormData $formData
+     * 
+     * @return Redirect
+     */
     public function do_delete_data(FormData $formData)
     {
         if (!$formData) {
