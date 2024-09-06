@@ -1,6 +1,4 @@
 # Pending Tasks
-- Fix error on data view without files
-- Fix validation rules VUE issue
 - Add Page Titles
 - Remove the API functions
 - Commenting on Blade Templates
@@ -9,8 +7,14 @@
 - Redesin the UI *
 - Add detailed comments to controller function
 - Design settings module
+- Fetch field data on attach field page (plan first)
+- Display image on form-data show page
+- Print button for form-data
+- Download pdf for form-data
 
 # Completed Tasks
+- Fix error on data view without files
+- Fix validation rules VUE issue
 - Add more validation rules
 - Update validation rules UI
 - Commenting on Controller Functions

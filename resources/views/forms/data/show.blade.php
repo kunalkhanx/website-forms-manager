@@ -33,6 +33,9 @@
             @php
                 $data = json_decode($formData->data, true);
                 function printData($dataToPrint, $validation_rules){
+                    if(!$dataToPrint){
+                        return '';
+                    }
                     $rules = explode('|', $validation_rules);
                     if(in_array('boolean', $rules)){
                         return $dataToPrint == 1 ? 'Yes' : 'No';
