@@ -1,14 +1,16 @@
 # Pending Tasks
+- Fix validation rules VUE issue
+- Add Page Titles
 - Remove the API functions
 - Commenting on Blade Templates
 - Create complete API module for Form management
 - Create a lots of data & test tables & set configurations
 - Redesin the UI *
 - Add more validation rules
-- Update validation rules UI
 - Add detailed comments to controller function
 
 # Completed Tasks
+- Update validation rules UI
 - Commenting on Controller Functions
 - View file view/download option on data view
 - Add a file model
