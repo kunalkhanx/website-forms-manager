@@ -61,6 +61,7 @@
                         'min' => 0,
                         'digits' => 0,
                         'in' => '',
+                        'mimes' => ''
                     ];
                     $existing_rules = old('validation_rules')
                         ? old('validation_rules')
@@ -101,6 +102,14 @@
                             type="checkbox" value="file"
                             class="v-checkbox">
                         <label for="vr-file" class="v-label" :class="{disabled: email || numeric || boolean}">File</label>
+                        <select name="mimes" class="v-input max-w-32" :disabled="email || numeric || boolean">
+                            <option value="">Any</option>
+                            <option value="jpg,png,webp,gif" {{$rules['mimes'] == 'jpg,png,webp,gif' ? 'selected' : ''}}>Image</option>
+                            <option value="mp3,aac,wav" {{$rules['mimes'] == 'mp3,aac,wav' ? 'selected' : ''}}>Audio</option>
+                            <option value="mp4.mov,avi,wmv,webm" {{$rules['mimes'] == 'mp4.mov,avi,wmv,webm' ? 'selected' : ''}}>Video</option>
+                            <option value="pdf,docx" {{$rules['mimes'] == 'pdf,docx' ? 'selected' : ''}}>Document</option>
+                            <option value="zip,7z,rar" {{$rules['mimes'] == 'zip,7z,rar' ? 'selected' : ''}}>Archive</option>
+                        </select>
                     </div>
 
                     <div class="flex items-center">

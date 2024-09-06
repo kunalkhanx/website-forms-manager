@@ -1,4 +1,5 @@
 # Pending Tasks
+- Fix error on data view without files
 - Fix validation rules VUE issue
 - Add Page Titles
 - Remove the API functions
@@ -6,10 +7,11 @@
 - Create complete API module for Form management
 - Create a lots of data & test tables & set configurations
 - Redesin the UI *
-- Add more validation rules
 - Add detailed comments to controller function
+- Design settings module
 
 # Completed Tasks
+- Add more validation rules
 - Update validation rules UI
 - Commenting on Controller Functions
 - View file view/download option on data view
