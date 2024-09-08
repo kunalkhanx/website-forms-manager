@@ -10,7 +10,7 @@
 - Display image on form-data show page
 - Print button for form-data
 - Download pdf for form-data
-- Create settings module
+- User avatar upload
 
 # Completed Tasks
 - Add Page Titles
