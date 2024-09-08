@@ -1,5 +1,7 @@
 @extends('app')
 
+@section('title', $field->id ? 'Update Field' : 'Create New Field')
+
 @section('head')
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 @endsection

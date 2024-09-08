@@ -1,18 +1,19 @@
 # Pending Tasks
-- Add Page Titles
 - Remove the API functions
 - Commenting on Blade Templates
 - Create complete API module for Form management
 - Create a lots of data & test tables & set configurations
-- Redesin the UI *
+- Add sideber & update the navbar
 - Add detailed comments to controller function
 - Design settings module
 - Fetch field data on attach field page (plan first)
 - Display image on form-data show page
 - Print button for form-data
 - Download pdf for form-data
+- Create settings module
 
 # Completed Tasks
+- Add Page Titles
 - Fix error on data view without files
 - Fix validation rules VUE issue
 - Add more validation rules

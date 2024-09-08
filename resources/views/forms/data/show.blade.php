@@ -1,5 +1,7 @@
 @extends('app')
 
+@section('title', 'Form-Data View')
+
 @section('main')
 
 <div class="container mx-auto max-w-2xl p-4 flex flex-col gap-6">

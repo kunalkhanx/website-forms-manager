@@ -1,5 +1,7 @@
 @extends('app')
 
+@section('title', $user->id ? 'Update User' : 'Create New User')
+
 @section('main')
     <div class="container mx-auto max-w-screen-xl p-4">
         <div class="mb-6 flex items-center">
@@ -8,7 +10,7 @@
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12l4-4m-4 4 4 4"/>
                 </svg>                  
             </a>
-            <h2 class="text-3xl">{{$user->id ? 'Update' : 'Create'}} User</h2>
+            <h2 class="text-3xl">{{$user->id ? 'Update' : 'Create New'}} User</h2>
         </div>
         <form action="{{$user->id ? route('users.do_update', ['user' => $user->id]) : route('users.do_create')}}" method="POST">
             @csrf

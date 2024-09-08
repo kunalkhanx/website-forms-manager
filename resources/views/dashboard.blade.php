@@ -1,5 +1,7 @@
 @extends('app')
 
+@section('title', 'Dashboard')
+
 @section('main')
     <div class="container mx-auto max-w-screen-xl p-4 flex flex-col gap-6">
 

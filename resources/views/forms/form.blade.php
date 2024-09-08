@@ -1,5 +1,7 @@
 @extends('app')
 
+@section('title', $form->id ? 'Update From' : 'Create New Form')
+
 @section('main')
 
 <div class="container mx-auto max-w-screen-xl p-4">

@@ -1,5 +1,6 @@
 @extends('app')
 
+@section('title', $formData->id ? 'Update Form-Data' : 'Add Form-Data')
 
 @section('main')
     <div class="container mx-auto max-w-screen-xl p-4">
