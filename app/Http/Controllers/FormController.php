@@ -9,7 +9,6 @@ use App\Models\FormData;
 use App\Models\FormField;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 
 class FormController extends Controller
 {

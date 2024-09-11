@@ -1,4 +1,6 @@
 # Pending Tasks
+- Fix Z-Index of alerts
+- Fix validation rules adding on file
 - Commenting on Blade Templates
 - Add file upload feature on api
 - Create a lots of data & test tables & set configurations
@@ -9,6 +11,7 @@
 - Print button for form-data
 - Download pdf for form-data
 - User avatar upload
+- Redirect to update page after submit any form
 
 # Completed Tasks
 - Enable JSON casting on form-data
