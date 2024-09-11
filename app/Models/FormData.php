@@ -10,6 +10,13 @@ class FormData extends Model
 {
     use HasFactory;
 
+    // protected function casts(): array
+    // {
+    //     return [
+    //         'data' => 'json',
+    //     ];
+    // }
+
     public function form():BelongsTo{
         return $this->belongsTo(Form::class);
     }

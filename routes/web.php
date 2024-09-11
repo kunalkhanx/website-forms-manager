@@ -68,8 +68,9 @@ Route::post('/forgot-password/set-password', [\App\Http\Controllers\AuthControll
 Route::get('/download/{file}', [\App\Http\Controllers\FileController::class, 'download'])->name('file_download');
 
 
-Route::middleware(['cors', 'APIAuth'])->group(function(){
-    Route::get('/api/forms/{formData}', [\App\Http\Controllers\FormController::class, 'show_api_data'])->name('forms.api.show');
-    Route::post('/api/forms/{form}', [\App\Http\Controllers\FormController::class, 'do_create_api_data'])->name('forms.api.create');
-    Route::patch('/api/forms/{form}/{formData}', [\App\Http\Controllers\FormController::class, 'do_update_api_data'])->name('forms.api.update');
+Route::middleware(['cors', 'APIAuth'])->prefix('/api')->group(function(){
+    Route::get('/form/{id}', [\App\Http\Controllers\APIController::class, 'form'])->name('api.form');
+    Route::get('/data/{form}', [\App\Http\Controllers\APIController::class, 'data'])->name('api.data');
+    Route::post('/data/{form}', [\App\Http\Controllers\APIController::class, 'create_data'])->name('api.create_data');
+    Route::patch('/data/{form}/{formData}', [\App\Http\Controllers\APIController::class, 'update_data'])->name('api.update_data');
 });

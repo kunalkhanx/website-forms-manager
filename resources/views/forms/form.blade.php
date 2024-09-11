@@ -59,15 +59,6 @@
         </form>
         @if($form->id)
         <hr>
-        @if($form->public)
-        <div class="">
-            <p class="text-lg font-medium mb-2">API Endpoints</p>
-            <p class="flex gap-3 text-xs"><span class="text-green-600">VIEW DATA </span>{{url('/')}}/api/forms/{form_data_id}</p>
-            <p class="flex gap-3 text-xs"><span class="text-purple-600">CREATE DATA </span>{{route('forms.api.create', ['form' => $form->id])}}</p>
-            <p class="flex gap-3 text-xs"><span class="text-amber-600">UPDATE DATA </span>{{route('forms.api.create', ['form' => $form->id])}}/{form_data_id}</p>
-        </div>
-        <hr>
-        @endif
         
         <div class="flex flex-col gap-6">
             <h2 class="text-2xl">Fields</h2>

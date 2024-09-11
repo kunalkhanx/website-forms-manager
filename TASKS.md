@@ -1,9 +1,9 @@
 # Pending Tasks
 - Remove the API functions
+- Enable JSON casting on form-data
 - Commenting on Blade Templates
-- Create complete API module for Form management
+- Add file upload feature on api
 - Create a lots of data & test tables & set configurations
-- Add sideber & update the navbar
 - Add detailed comments to controller function
 - Design settings module
 - Fetch field data on attach field page (plan first)
@@ -13,6 +13,8 @@
 - User avatar upload
 
 # Completed Tasks
+- Create complete API module for Form management
+- Add sideber & update the navbar
 - Add Page Titles
 - Fix error on data view without files
 - Fix validation rules VUE issue
