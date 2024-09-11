@@ -412,61 +412,6 @@ class FormController extends Controller
     }
 
     /**
-     * Function - Create new form-data using API
-     * 
-     * @param Request $request
-     * @param Form $form
-     * 
-     * @return JSON
-     */
-    public function do_create_api_data(Request $request, Form $form)
-    {
-        if (!$form) {
-            return response('', 404);
-        }
-        if (!$form->public) {
-            return response('', 404);
-        }
-        $fields = $form->fields()->get();
-        $validation_rules = [];
-        $data = [];
-        foreach ($fields as $field) {
-            $validation_rules[$field->name] = ($field->pivot->is_required ? 'required|' : '') . $field->validation_rules;
-            if ($field->pivot->is_unique && $request->{$field->name}) {
-                $uniqueResult = FormData::where('form_id', $form->id)->where('data', 'LIKE', '%"email": "' . $request->{$field->name} . '"%')->first();
-                if ($uniqueResult) {
-                    return response()->json([
-                        'errors' => [
-                            $field->name => $field->label . ' is already exists.'
-                        ]
-                    ], 400);
-                }
-            }
-            $data[$field->name] = $request->get($field->name);
-        }
-        $validator = Validator::make($request->all(), $validation_rules);
-        if ($validator->fails()) {
-            return response()->json([
-                'errors' => $validator->errors()
-            ], 400);
-        }
-
-        $formData = new FormData;
-        $formData->form_id = $form->id;
-        $formData->data = json_encode($data);
-        $result = $formData->save();
-        if (!$result) {
-            return response()->json([
-                'message' => 'Unable to add data!'
-            ], 500);
-        }
-        return response()->json([
-            'message' => 'Data added successfully!',
-            'data' => $formData
-        ], 201);
-    }
-
-    /**
      * Function - Update exisitng form-data action
      * 
      * @param Request $request
@@ -525,63 +470,6 @@ class FormController extends Controller
             return redirect()->back()->with('error', 'Unable to updated data!');
         }
         return redirect()->back()->with('success', 'Data updated successfully!');
-    }
-
-    /**
-     * Function - Update exisitng form-data action API
-     * 
-     * @param Request $request
-     * @param Form $form
-     * @param FormData $formData
-     * 
-     * @return JSON
-     */
-    public function do_update_api_data(Request $request, Form $form, FormData $formData)
-    {
-        if (!$formData || !$form) {
-            return response('', 404);
-        }
-        if (!$form->public) {
-            return response('', 404);
-        }
-        $fields = $form->fields()->get();
-        $validation_rules = [];
-        $data = [];
-        foreach ($fields as $field) {
-            $validation_rules[$field->name] = ($field->pivot->is_required ? 'required|' : '') . $field->validation_rules;
-            if ($field->pivot->is_unique && $request->{$field->name}) {
-                $uniqueResult = FormData::where('form_id', $form->id)->where('data', 'LIKE', '%"email": "' . $request->{$field->name} . '"%')->where('id', '!=', $formData->id)->first();
-                if ($uniqueResult) {
-                    return response()->json([
-                        'errors' => [
-                            $field->name => $field->label . ' is already exists.'
-                        ]
-                    ], 400);
-                }
-            }
-
-            $data[$field->name] = $request->get($field->name);
-        }
-
-        $validator = Validator::make($request->all(), $validation_rules);
-        if ($validator->fails()) {
-            return response()->json([
-                'errors' => $validator->errors()
-            ], 400);
-        }
-
-        $formData->data = json_encode($data);
-        $result = $formData->save();
-
-        if (!$result) {
-            return response()->json([
-                'message' => 'Unable to update data!'
-            ], 500);
-        }
-        return response()->json([
-            'message' => 'Data updated successfully!',
-            'data' => $formData
-        ], 200);
     }
 
     /**
