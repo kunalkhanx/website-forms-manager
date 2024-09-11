@@ -104,7 +104,7 @@
                     @endphp
                     @foreach ($formData as $row)
                         @php
-                            $data = json_decode($row->data, true);
+                            $data = $row->data;
                         @endphp
                         <tr
                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">

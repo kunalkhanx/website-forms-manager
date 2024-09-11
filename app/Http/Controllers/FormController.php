@@ -126,24 +126,6 @@ class FormController extends Controller
     }
 
     /**
-     * Function - Show API JSON Data
-     * 
-     * @param FormData $formData
-     * 
-     * @return JSON
-     */
-    public function show_api_data(FormData $formData)
-    {
-        if (!$formData) {
-            return response('', 404);
-        }
-        return response()->json([
-            'message' => 'Request success!',
-            'data' => json_decode($formData->data, true)
-        ], 200);
-    }
-
-    /**
      * Function - Exported form-data as CSV
      * 
      * @param Request $request
@@ -403,7 +385,7 @@ class FormController extends Controller
         }
         $formData = new FormData;
         $formData->form_id = $form->id;
-        $formData->data = json_encode($data);
+        $formData->data = $data;
         $result = $formData->save();
         if (!$result) {
             return redirect()->back()->withInput()->with('error', 'Unable to add data!');
@@ -464,7 +446,7 @@ class FormController extends Controller
                 $data[$file_id] = $fileModel->id;
             }
         }
-        $formData->data = json_encode($data);
+        $formData->data = $data;
         $result = $formData->save();
         if (!$result) {
             return redirect()->back()->with('error', 'Unable to updated data!');

@@ -56,14 +56,13 @@ class APIController extends Controller
         }
         $formData = new FormData;
         $formData->form_id = $form->id;
-        $formData->data = json_encode($data);
+        $formData->data = $data;
         $result = $formData->save();
         if (!$result) {
             return response()->json([
                 'message' => 'Unable to add data!'
             ], 500);
         }
-        $formData->data = json_decode($formData->data, true);
         return response()->json([
             'message' => 'Data added successfully!',
             'data' => $formData
@@ -104,7 +103,7 @@ class APIController extends Controller
             ], 400);
         }
 
-        $formData->data = json_encode($data);
+        $formData->data = $data;
         $result = $formData->save();
 
         if (!$result) {
@@ -112,7 +111,6 @@ class APIController extends Controller
                 'message' => 'Unable to update data!'
             ], 500);
         }
-        $formData->data = json_decode($formData->data, true);
         return response()->json([
             'message' => 'Data updated successfully!',
             'data' => $formData

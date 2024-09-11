@@ -1,5 +1,4 @@
 # Pending Tasks
-- Enable JSON casting on form-data
 - Commenting on Blade Templates
 - Add file upload feature on api
 - Create a lots of data & test tables & set configurations
@@ -12,6 +11,7 @@
 - User avatar upload
 
 # Completed Tasks
+- Enable JSON casting on form-data
 - Remove the API functions
 - Create complete API module for Form management
 - Add sideber & update the navbar

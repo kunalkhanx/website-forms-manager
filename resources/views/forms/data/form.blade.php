@@ -52,7 +52,7 @@
 
                     return ['text'];
                 }
-                $fData = json_decode($formData->data, true);
+                $fData = $formData->data;
             @endphp
 
             <form action="{{$formData->id ? route('forms.do_update_data', ['formData' => $formData->id]) : route('forms.do_create_data', ['form' => $form->id])}}" class="flex flex-col gap-4" method="POST" enctype="multipart/form-data">

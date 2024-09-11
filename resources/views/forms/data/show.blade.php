@@ -33,7 +33,7 @@
                 </tr>
             </thead>
             @php
-                $data = json_decode($formData->data, true);
+                $data = $formData->data;
                 function printData($dataToPrint, $validation_rules){
                     if(!$dataToPrint){
                         return '';
