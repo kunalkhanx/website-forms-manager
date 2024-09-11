@@ -66,8 +66,8 @@ class FieldController extends Controller
                 $rules .= "|{$rule}:{$request->in}";
             }else if($rule === 'digits' && $request->digits){
                 $rules .= "|{$rule}:{$request->digits}";
-            }else if($rule === 'file' && $request->mimes){
-                $rules .= "|mimes:{$request->mimes}";
+            // }else if($rule === 'file' && $request->mimes){
+            //     $rules .= "|mimes:{$request->mimes}";
             }else{
                 $rules .= "|{$rule}";
             }
@@ -113,8 +113,8 @@ class FieldController extends Controller
                 $rules .= "|{$rule}:{$request->in}";
             }else if($rule === 'digits' && $request->digits){
                 $rules .= "|{$rule}:{$request->digits}";
-            }else if($rule === 'file' && $request->mimes){
-                $rules .= "|file|mimes:{$request->mimes}";
+            // }else if($rule === 'file' && $request->mimes){
+            //     $rules .= "|file|mimes:{$request->mimes}";
             }else{
                 $rules .= "|{$rule}";
             }
