@@ -1,18 +1,18 @@
 # Pending Tasks
 - Add search for fields
 - Commenting on Blade Templates
-- Add file upload feature on api
 - Create a lots of data & test tables & set configurations
 - Add detailed comments to controller function
 - Design settings module
 - Fetch field data on attach field page (plan first)
-- Display image on form-data show page
 - Print button for form-data
 - Download pdf for form-data
 - User avatar upload
 - Redirect to update page after submit any form
 
 # Completed Tasks
+- Display image on form-data show page
+- Add file upload feature on api
 - Fix Z-Index of alerts
 - Fix validation rules adding on file
 - Enable JSON casting on form-data

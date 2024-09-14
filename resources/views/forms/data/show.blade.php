@@ -41,8 +41,10 @@
                     $rules = explode('|', $validation_rules);
                     if(in_array('boolean', $rules)){
                         return $dataToPrint == 1 ? 'Yes' : 'No';
-                    }
-                    if(in_array('file', $rules)){
+                    }elseif(in_array('file', $rules) && in_array('mimes:jpg,png,webp,gif', $rules)){
+                        return '<img src="'. route('file_download', ['file' => $dataToPrint]) .'" class="h-12" alt="" />
+                        <a href="' . route('file_download', ['file' => $dataToPrint]) . '" class="text-blue-600 hover:text-blue-700 hover:underline">Download</a>';
+                    }elseif(in_array('file', $rules)){
                         return '<a href="' . route('file_download', ['file' => $dataToPrint]) . '" class="text-blue-600 hover:text-blue-700 hover:underline">Download</a>';
                     }
                     return $dataToPrint;
