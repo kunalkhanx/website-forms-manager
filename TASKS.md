@@ -1,4 +1,5 @@
 # Pending Tasks
+- Add search for fields
 - Commenting on Blade Templates
 - Add file upload feature on api
 - Create a lots of data & test tables & set configurations

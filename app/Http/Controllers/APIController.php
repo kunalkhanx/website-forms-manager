@@ -27,7 +27,6 @@ class APIController extends Controller
     }
 
     public function create_data(Request $request, Form $form){
-        dd($request->file('file'));
         if(!$form || !$form->public){
             return response('', 404);
         }
