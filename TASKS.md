@@ -11,6 +11,7 @@
 - Redirect to update page after submit any form
 
 # Completed Tasks
+- Designed & added new logo
 - Display image on form-data show page
 - Add file upload feature on api
 - Fix Z-Index of alerts
