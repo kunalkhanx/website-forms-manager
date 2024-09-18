@@ -56,6 +56,9 @@ class FieldController extends Controller
             'placeholder' => 'nullable|max:100',
             'validation_rules' => 'array'
         ]);
+        if(!$request->validation_rules){
+            $request->validation_rules = [];
+        }
         $rules = "";
         foreach($request->validation_rules as $rule){
             if($rule === 'max' && $request->max){
@@ -82,7 +85,7 @@ class FieldController extends Controller
         if(!$result){
             return redirect()->back()->withInput()->with('error', 'Unable to create the field!');
         }
-        return redirect()->back()->with('success', 'Field created successfully!');
+        return redirect()->route('fields.do_update', $field->id)->with('success', 'Field created successfully!');
     }
 
     /**

@@ -389,7 +389,7 @@ class FormController extends Controller
         if (!$result) {
             return redirect()->back()->withInput()->with('error', 'Unable to add data!');
         }
-        return redirect()->back()->with('success', 'Data added successfully!');
+        return redirect()->route('forms.show_data', ['formData' => $formData->id, 'id' => $form->id])->with('success', 'Data added successfully!');
     }
 
     /**

@@ -78,7 +78,7 @@ class UserController extends Controller
         if (!$result) {
             return redirect()->back()->with('error', 'Unable to create user. Please try again!')->withInput();
         }
-        return redirect()->back()->with('success', 'User created successfully!');
+        return redirect()->route('users.update', ['user' => $user->id])->with('success', 'User created successfully!');
     }
 
     /**

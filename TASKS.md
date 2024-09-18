@@ -8,9 +8,13 @@
 - Print button for form-data
 - Download pdf for form-data
 - User avatar upload
-- Redirect to update page after submit any form
+- Create View for user
+- Create View for form
+- Create View for field
+- Add remove token option for user
 
 # Completed Tasks
+- Redirect to update page after submit any form
 - Designed & added new logo
 - Display image on form-data show page
 - Add file upload feature on api
