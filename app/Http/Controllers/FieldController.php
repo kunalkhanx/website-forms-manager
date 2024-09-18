@@ -13,8 +13,15 @@ class FieldController extends Controller
      * 
      * @return View
      */
-    public function index(){
-        $fields = Field::where('status', '>=', 0)->latest()->paginate(10);
+    public function index(Request $request){
+        $query = Field::select();
+        $search = $request->search;
+        if($search){
+            $query->where(function($query) use($search){
+                $query->where('name', 'LIKE', '%'.$search.'%')->where('label', 'LIKE', '%'.$search.'%')->where('placeholder', 'LIKE', '%'.$search.'%');
+            }); 
+        }
+        $fields = $query->where('status', '>=', 0)->latest()->paginate(10);
         return view('fields.index', ['fields' => $fields]);
     }
 

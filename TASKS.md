@@ -12,6 +12,7 @@
 - Create View for form
 - Create View for field
 - Add remove token option for user
+- Review & Fix responsiveness
 
 # Completed Tasks
 - Redirect to update page after submit any form

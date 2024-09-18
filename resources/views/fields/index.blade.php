@@ -3,14 +3,31 @@
 @section('title', 'Fields')
 
 @section('main')
-    <div class="container mx-auto max-w-screen-xl p-4">
+    <div class="container mx-auto max-w-screen-xl p-4 flex flex-col gap-6">
 
-        <div class="mb-6 flex max-sm:flex-col gap-6 justify-between items-center">
+        <div class="flex max-sm:flex-col gap-6 justify-between items-center">
             <h2 class="text-3xl">Fields</h2>
 
             <a href="{{ route('fields.create') }}"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create
                 Field</a>
+        </div>
+
+        <div class="flex items-end gap-3 justify-between">
+
+            <form action="{{route('fields')}}" method="GET" class="w-full max-w-xs">
+                <div class="relative w-full">
+                    <button type="submit" class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                        <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
+                        </svg>                          
+                    </button>
+                    <input name="search" type="text" id="search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search" value="{{request()->search}}">
+                </div>
+            </form>
+
+           
+
         </div>
 
 
