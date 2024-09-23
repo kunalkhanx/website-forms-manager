@@ -15,7 +15,7 @@
 
         <div class="flex items-end gap-3 justify-between">
 
-            <form action="{{route('fields')}}" method="GET" class="w-full max-w-xs">
+            <form action="{{route('fields')}}" method="GET" class="w-full sm:max-w-xs">
                 <div class="relative w-full">
                     <button type="submit" class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                         <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">

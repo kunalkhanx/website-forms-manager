@@ -35,9 +35,9 @@
         </div>
 
 
-        <div class="flex items-end gap-3 justify-between">
+        <div class="flex max-md:flex-col items-end gap-3 justify-between">
 
-            <form action="{{route('forms.form_data', ['id' => $form->id])}}" method="GET" class="w-full max-w-xs">
+            <form action="{{route('forms.form_data', ['id' => $form->id])}}" method="GET" class="w-full md:max-w-xs">
                 <div class="relative w-full">
                     <button type="submit" class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                         <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -48,13 +48,13 @@
                 </div>
             </form>
 
-           <form action="{{route('forms.form_data', ['id' => $form->id])}}" method="GET" class="flex items-end gap-3">
-                <div class="form-control w-full max-w-36">
+           <form action="{{route('forms.form_data', ['id' => $form->id])}}" method="GET" class="flex max-sm:flex-col md:justify-end sm:items-end gap-3 w-full">
+                <div class="form-control w-full md:max-w-36">
                     <label for="start_date">Start date</label>
                     <input type="date" name="start_date" id="start_date" value="{{request()->start_date}}">
                 </div>
 
-                <div class="form-control w-full max-w-36">
+                <div class="form-control w-full md:max-w-36">
                     <label for="end_date">End date</label>
                     <input type="date" name="end_date" id="end_date" value="{{request()->end_date}}">
                 </div>

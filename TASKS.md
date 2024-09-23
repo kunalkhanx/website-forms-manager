@@ -12,9 +12,9 @@
 - Create View for form
 - Create View for field
 - Add remove token option for user
-- Review & Fix responsiveness
 
 # Completed Tasks
+- Review & Fix responsiveness
 - Redirect to update page after submit any form
 - Designed & added new logo
 - Display image on form-data show page
