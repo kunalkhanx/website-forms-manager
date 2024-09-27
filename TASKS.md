@@ -11,9 +11,9 @@
 - Create View for user
 - Create View for form
 - Create View for field
-- Add remove token option for user
 
 # Completed Tasks
+- Add remove token option for user
 - Review & Fix responsiveness
 - Redirect to update page after submit any form
 - Designed & added new logo

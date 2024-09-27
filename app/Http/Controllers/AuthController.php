@@ -149,18 +149,21 @@ class AuthController extends Controller
      * 
      * @return Redirect
      */
-    public function generate_token(){
+    public function generate_token(Request $request){
         $user = Auth::user();
-        $data = [
-            'user' => $user->id,
-            'created_at' => time()
-        ];
-        $encoded_str = Crypt::encryptString(json_encode($data));
+        $encoded_str = null;
+        if(!$request->remove){
+            $data = [
+                'user' => $user->id,
+                'created_at' => time()
+            ];
+            $encoded_str = Crypt::encryptString(json_encode($data));
+        }        
         $user->public_token = $encoded_str;
         $result = $user->save();
         if(!$result){
-            return redirect()->back()->with('error', 'Unable to create new public token!');
+            return redirect()->back()->with('error', !$request->remove ? 'Unable to create new public token!' : 'Unable to remove public token!');
         }
-        return redirect()->back()->with('success', 'New public token created successfully!');
+        return redirect()->back()->with('success', !$request->remove ? 'New public token created successfully!' : 'Public token remoed successfully!');
     }
 }
