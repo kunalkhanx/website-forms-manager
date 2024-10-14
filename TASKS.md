@@ -1,5 +1,4 @@
 # Pending Tasks
-- Add search for fields
 - Commenting on Blade Templates
 - Create a lots of data & test tables & set configurations
 - Add detailed comments to controller function
@@ -13,6 +12,8 @@
 - Create View for field
 
 # Completed Tasks
+- Create README.md & LICENSE
+- Add search for fields
 - Add remove token option for user
 - Review & Fix responsiveness
 - Redirect to update page after submit any form
